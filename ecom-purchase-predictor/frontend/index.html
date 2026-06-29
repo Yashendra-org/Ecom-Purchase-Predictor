@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PurchaseIQ — E-Commerce Prediction</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
 <body>
 
-  <!-- ── Header ─────────────────────────────────── -->
+  <!-- HEADER -->
   <header>
     <div class="header-inner">
       <div class="logo">
@@ -16,152 +17,250 @@
         <span class="logo-text">PurchaseIQ</span>
       </div>
       <nav class="header-links">
-        <a href="#predict">Predict</a>
+        <a href="#upload">Upload</a>
+        <a href="#results">Results</a>
         <a href="#models">Models</a>
-        <a href="https://github.com/" target="_blank" class="btn-github">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <a href="https://github.com/Yashendra-org/Ecom-Purchase-Predictor.git" target="_blank" class="btn-github">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
           View on GitHub
         </a>
       </nav>
     </div>
   </header>
 
-  <!-- ── Hero ───────────────────────────────────── -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <p class="hero-eyebrow">ML-Powered Retail Intelligence</p>
       <h1 class="hero-title">Will this customer<br><em>buy?</em></h1>
-      <p class="hero-sub">Enter customer behavioural signals and get instant predictions from three trained machine learning models.</p>
-      <a href="#predict" class="btn-primary">Try the Predictor ↓</a>
+      <p class="hero-sub">Upload your CSV and instantly get predictions from three trained machine learning models with beautiful charts.</p>
+      <a href="#upload" class="btn-primary">Upload CSV ↓</a>
     </div>
     <div class="hero-stats">
       <div class="stat"><span class="stat-num">3</span><span class="stat-label">ML Models</span></div>
       <div class="stat"><span class="stat-num">6</span><span class="stat-label">Input Features</span></div>
-      <div class="stat"><span class="stat-num">~</span><span class="stat-label">Real-time Output</span></div>
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Live Charts</span></div>
     </div>
   </section>
 
-  <!-- ── Predictor Form ─────────────────────────── -->
-  <section class="section" id="predict">
+  <!-- UPLOAD SECTION -->
+  <section class="section" id="upload">
     <div class="container">
-      <h2 class="section-title">Customer Predictor</h2>
-      <p class="section-sub">Fill in the customer details below and see all three models vote on the outcome.</p>
+      <h2 class="section-title">Upload Your Dataset</h2>
+      <p class="section-sub">Drop your <code>ecom_purchase_prediction4.csv</code> file below. Required columns: Age, Session_Duration_Min, Pages_Viewed, Items_In_Cart, Days_Since_Last_Visit, Discount_Used, Purchased.</p>
 
-      <div class="predictor-layout">
-        <!-- Form -->
-        <div class="card form-card">
-          <h3>Customer Signals</h3>
-
-          <div class="field-group">
-            <label for="age">Age</label>
-            <div class="input-wrap">
-              <input type="number" id="age" min="18" max="80" value="30" />
-              <span class="unit">years</span>
-            </div>
+      <div class="drop-zone" id="dropZone">
+        <div class="dz-content">
+          <div class="dz-icon-wrap">
+            <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 16V4m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 16v1a3 3 0 003 3h12a3 3 0 003-3v-1" stroke-linecap="round"/>
+            </svg>
           </div>
-
-          <div class="field-group">
-            <label for="session">Session Duration</label>
-            <div class="input-wrap">
-              <input type="number" id="session" min="0" max="120" value="12" />
-              <span class="unit">min</span>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="pages">Pages Viewed</label>
-            <div class="input-wrap">
-              <input type="number" id="pages" min="0" max="100" value="20" />
-              <span class="unit">pages</span>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="cart">Items in Cart</label>
-            <div class="input-wrap">
-              <input type="number" id="cart" min="0" max="20" value="3" />
-              <span class="unit">items</span>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="days">Days Since Last Visit</label>
-            <div class="input-wrap">
-              <input type="number" id="days" min="0" max="365" value="10" />
-              <span class="unit">days</span>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label>Discount Used?</label>
-            <div class="toggle-wrap">
-              <button class="toggle-btn active" id="discount-yes" onclick="setDiscount(1)">Yes</button>
-              <button class="toggle-btn" id="discount-no"  onclick="setDiscount(0)">No</button>
-            </div>
-          </div>
-
-          <button class="btn-predict" onclick="predict()">
-            <span id="btn-label">Run Prediction</span>
-          </button>
+          <p class="dz-title">Drop CSV file here</p>
+          <p class="dz-sub">or <span class="dz-link" onclick="document.getElementById('file-input').click()">click to browse</span></p>
+          <input type="file" id="file-input" accept=".csv" style="display:none" />
         </div>
+      </div>
 
-        <!-- Results -->
-        <div class="results-col">
-          <div class="card result-card" id="result-rf">
-            <div class="model-badge rf">Random Forest</div>
-            <div class="verdict" id="verdict-rf">—</div>
-            <div class="confidence" id="conf-rf"></div>
-          </div>
-          <div class="card result-card" id="result-dt">
-            <div class="model-badge dt">Decision Tree</div>
-            <div class="verdict" id="verdict-dt">—</div>
-            <div class="confidence" id="conf-dt"></div>
-          </div>
-          <div class="card result-card" id="result-lr">
-            <div class="model-badge lr">Logistic Regression</div>
-            <div class="verdict" id="verdict-lr">—</div>
-            <div class="confidence" id="conf-lr"></div>
-          </div>
-          <div class="card consensus-card" id="consensus-card" style="display:none;">
-            <p class="consensus-label">Model Consensus</p>
-            <p class="consensus-verdict" id="consensus-text"></p>
-          </div>
-        </div>
+      <div class="feature-pills">
+        <span class="pill">Age</span>
+        <span class="pill">Session Duration</span>
+        <span class="pill">Pages Viewed</span>
+        <span class="pill">Items In Cart</span>
+        <span class="pill">Days Since Visit</span>
+        <span class="pill">Discount Used</span>
+        <span class="pill pill-label">Purchased (label)</span>
       </div>
     </div>
   </section>
 
-  <!-- ── Model Info ─────────────────────────────── -->
+  <!-- RESULTS (hidden until file uploaded) -->
+  <div id="results" class="hidden">
+
+    <!-- DATASET STATS -->
+    <section class="section section-dark" id="results">
+      <div class="container">
+        <h2 class="section-title" id="file-name-title">Dataset Overview</h2>
+        <p class="section-sub" id="file-sub">Summary of your uploaded dataset.</p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-card-label">Total Rows</span>
+            <span class="stat-card-val" id="st-total">—</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card-label">Purchased</span>
+            <span class="stat-card-val" id="st-buy">—</span>
+            <span class="stat-card-sub" id="st-buy-pct"></span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card-label">Did Not Purchase</span>
+            <span class="stat-card-val" id="st-nobuy">—</span>
+            <span class="stat-card-sub" id="st-nobuy-pct"></span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card-label">Avg Session</span>
+            <span class="stat-card-val" id="st-session">—</span>
+            <span class="stat-card-sub">minutes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODEL RESULTS -->
+    <section class="section" id="model-results">
+      <div class="container">
+        <h2 class="section-title">Model Predictions</h2>
+        <p class="section-sub">All three models evaluated on your dataset with accuracy scores.</p>
+
+        <div class="model-cards">
+          <div class="model-card" id="card-rf">
+            <div class="model-card-header">
+              <div class="model-dot" style="background:#6c63ff"></div>
+              <span class="model-card-name">Random Forest</span>
+              <span class="model-acc-badge" id="acc-rf">—</span>
+            </div>
+            <div class="model-verdict" id="verdict-rf">—</div>
+            <div class="conf-label">Confidence</div>
+            <div class="conf-bar-wrap">
+              <div class="conf-bar" id="bar-rf" style="background:#6c63ff"></div>
+              <span class="conf-pct" id="pct-rf">0%</span>
+            </div>
+          </div>
+
+          <div class="model-card" id="card-dt">
+            <div class="model-card-header">
+              <div class="model-dot" style="background:#34d399"></div>
+              <span class="model-card-name">Decision Tree</span>
+              <span class="model-acc-badge" id="acc-dt">—</span>
+            </div>
+            <div class="model-verdict" id="verdict-dt">—</div>
+            <div class="conf-label">Confidence</div>
+            <div class="conf-bar-wrap">
+              <div class="conf-bar" id="bar-dt" style="background:#34d399"></div>
+              <span class="conf-pct" id="pct-dt">0%</span>
+            </div>
+          </div>
+
+          <div class="model-card" id="card-lr">
+            <div class="model-card-header">
+              <div class="model-dot" style="background:#fb923c"></div>
+              <span class="model-card-name">Logistic Regression</span>
+              <span class="model-acc-badge" id="acc-lr">—</span>
+            </div>
+            <div class="model-verdict" id="verdict-lr">—</div>
+            <div class="conf-label">Confidence</div>
+            <div class="conf-bar-wrap">
+              <div class="conf-bar" id="bar-lr" style="background:#fb923c"></div>
+              <span class="conf-pct" id="pct-lr">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="consensus-box">
+          <div class="consensus-icon">◎</div>
+          <div>
+            <p class="consensus-label">Model Consensus</p>
+            <p class="consensus-text" id="cons-text">—</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARTS -->
+    <section class="section section-dark">
+      <div class="container">
+        <h2 class="section-title">Data Visualizations</h2>
+        <p class="section-sub">Distribution and pattern analysis from your dataset.</p>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3 class="chart-title">Purchase Distribution</h3>
+            <div class="chart-wrap"><canvas id="chartPurchase" role="img" aria-label="Bar chart of purchased vs not purchased">Purchase distribution chart.</canvas></div>
+          </div>
+          <div class="chart-card">
+            <h3 class="chart-title">Cart Size vs Purchase Rate</h3>
+            <div class="chart-wrap"><canvas id="chartCart" role="img" aria-label="Purchase rate by items in cart">Cart vs purchase rate chart.</canvas></div>
+          </div>
+          <div class="chart-card">
+            <h3 class="chart-title">Session Duration Distribution</h3>
+            <div class="chart-wrap"><canvas id="chartSession" role="img" aria-label="Histogram of session duration">Session duration histogram.</canvas></div>
+          </div>
+          <div class="chart-card">
+            <h3 class="chart-title">Discount Impact on Purchases</h3>
+            <div class="chart-wrap"><canvas id="chartDiscount" role="img" aria-label="Purchase rate with vs without discount">Discount impact chart.</canvas></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREDICTION TABLE -->
+    <section class="section">
+      <div class="container">
+        <div class="table-header-row">
+          <div>
+            <h2 class="section-title" style="margin-bottom:4px">Row-by-Row Predictions</h2>
+            <p class="section-sub" style="margin-bottom:0">First 50 rows — actual vs Random Forest prediction.</p>
+          </div>
+          <span class="table-acc-badge" id="pred-acc-label"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Age</th>
+                <th>Session (min)</th>
+                <th>Pages</th>
+                <th>Cart</th>
+                <th>Days</th>
+                <th>Discount</th>
+                <th>Actual</th>
+                <th>Predicted</th>
+                <th>Match</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end #results -->
+
+  <!-- MODELS INFO -->
   <section class="section section-dark" id="models">
     <div class="container">
       <h2 class="section-title">About the Models</h2>
-      <p class="section-sub">Three classifiers trained on e-commerce customer behaviour data.</p>
+      <p class="section-sub">Three scikit-learn classifiers trained on e-commerce customer behaviour data.</p>
       <div class="models-grid">
         <div class="model-info-card">
-          <div class="model-icon rf-bg">🌲</div>
+          <div class="model-emoji rf-bg">🌲</div>
           <h4>Random Forest</h4>
           <p>An ensemble of decision trees that votes on the final outcome. Robust to noise and typically the most accurate of the three.</p>
-          <div class="tag">sklearn · RandomForestClassifier</div>
+          <code>RandomForestClassifier</code>
         </div>
         <div class="model-info-card">
-          <div class="model-icon dt-bg">🌿</div>
+          <div class="model-emoji dt-bg">🌿</div>
           <h4>Decision Tree</h4>
           <p>A single interpretable tree that splits on feature thresholds. Fast and transparent — you can trace exactly why it made a call.</p>
-          <div class="tag">sklearn · DecisionTreeClassifier</div>
+          <code>DecisionTreeClassifier</code>
         </div>
         <div class="model-info-card">
-          <div class="model-icon lr-bg">📈</div>
+          <div class="model-emoji lr-bg">📈</div>
           <h4>Logistic Regression</h4>
           <p>A linear model that estimates the probability of purchase. Great baseline; excels when the decision boundary is roughly linear.</p>
-          <div class="tag">sklearn · LogisticRegression</div>
+          <code>LogisticRegression</code>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Footer ─────────────────────────────────── -->
   <footer>
-    <p>Built with Python · scikit-learn · HTML/CSS/JS &nbsp;·&nbsp; <a href="https://github.com/">View source on GitHub</a></p>
+    <p>Built with Python · scikit-learn · HTML / CSS / JS &nbsp;·&nbsp; <a href="https://github.com/">View source on GitHub</a></p>
   </footer>
 
   <script src="app.js"></script>
